@@ -6,7 +6,7 @@ using WTelegram;
 
 namespace TelegramSender
 {
-    public class Telegram
+    public static class Telegram
     {
         static Client client = new WTelegram.Client(Config);
         /// <summary>
@@ -22,9 +22,10 @@ namespace TelegramSender
                 case "phone_number": return "+6283849995719";
                 //case "verification_code": Console.Write("Code: "); return Console.ReadLine();
                 // IMPORTANT!
-                default: return null;                  
+                default: return null;
             }
         }
+        static User FindPhoneNumber(Contacts_Contacts contacts, string phoneNumber) => contacts.users.First(x => x.Value.phone == phoneNumber).Value;
         /// <summary>
         /// Gets contact and returns user with the specified phone number
         /// </summary>
@@ -39,14 +40,7 @@ namespace TelegramSender
             {
                 return null;
             }
-            for (int i = 0; i < contacts.users.Count; i++)
-            {
-                foreach (var item in contacts.users.Where(x => x.Value.phone == phoneNumber))
-                {
-                    return item.Value;
-                }
-            }
-            return null;
+            return FindPhoneNumber(contacts, phoneNumber);
         }
         /// <summary>
         /// Sends a message to the phone number
@@ -67,10 +61,7 @@ namespace TelegramSender
                 var contacts = await client.Contacts_ImportContacts(new[]{
                 new InputPhoneContact { phone = phoneNumber}
                 });
-                foreach (var item in contacts.users.Where(x => x.Value.phone == phoneNumber))
-                {
-                    await client.SendMessageAsync(item.Value.ToInputPeer(), message);
-                }
+                await client.SendMessageAsync(contacts.users.First(x => x.Value.phone == phoneNumber).Value.ToInputPeer(), message);
             }
         }
     }
