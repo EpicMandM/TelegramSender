@@ -9,6 +9,10 @@ namespace TelegramSender
     public class Telegram
     {
         static Client client = new WTelegram.Client(Config);
+        /// <summary>
+        /// Configure the Client
+        /// </summary>
+        /// <param name="what">Selector that used at Client's initialization </param>
         static string Config(string what)
         {
             switch (what)
@@ -21,6 +25,12 @@ namespace TelegramSender
                 default: return null;                  
             }
         }
+        /// <summary>
+        /// Gets contact and returns user with the specified phone number
+        /// </summary>
+        /// <param name="client">Initialized client</param>
+        /// <param name="phoneNumber">Phone number with +</param>
+        /// <returns>User with the specified phone number</returns>
         static async Task<User> GetContact(Client client, string phoneNumber)
         {
             phoneNumber = phoneNumber.Substring(1);
@@ -38,6 +48,12 @@ namespace TelegramSender
             }
             return null;
         }
+        /// <summary>
+        /// Sends a message to the phone number
+        /// </summary>
+        /// <param name="phoneNumber">Phone number with +</param>
+        /// <param name="message">Any message</param>
+        /// <returns>An instance of Task</returns>
         public static async Task SendMessageAsync(string phoneNumber, string message)
         {
             var my = await client.LoginUserIfNeeded();
