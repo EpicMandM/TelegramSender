@@ -1,5 +1,17 @@
-Написал минимально жизнеспособный проект, т.к. тех.задание требует уточнений. 
-В качестве фреймворка для работы с Telegram Client API используется фреймворк WTelegram, т.к. он недавно обновлялся и имеет весь необходимый функционал. 
-Использование данного кода может забанить аккаунт, поэтому желательно использовать его с осторожностью.
-В будущем, если будет необходимость, то можно добавить в проект работу с API сервисов для выдачи и верификации мобильных номеров, чтобы при бане программа сама вытягивала новый номер и активировала его.
-Данные для программы лучше генерировать тут: https://my.telegram.org/auth?to=apps
+# Telegram Sender
+
+This is a .NET class library that provides a simple API for sending messages via Telegram. The library uses the TLSharp library to interact with the Telegram API.
+
+## Getting Started
+
+To use this library in your .NET project, you will need to add a reference to the `TelegramSender` project and include the following using statement in your code:
+
+```csharp
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TL;
+using WTelegram;
+```
+
+Once you have done this, you can call the `SendMessageAsync` method in the `Telegram` class to send a message to a phone number. The method takes two parameters: the phone number and the message to send.
