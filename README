@@ -1,4 +1,4 @@
-#Telegram Sender
+# Telegram Sender
 
 This is a .NET class library that provides a simple API for sending messages via Telegram. The library uses the TLSharp library to interact with the Telegram API.
 
